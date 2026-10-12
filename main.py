@@ -176,31 +176,3 @@ if __name__ == "__main__":
     except (TypeError, ValueError, FileNotFoundError, ConnectionError) as error:
         print("Error: " + str(error))
 
-    print()
-    print("=== Error handling demo ===")
-
-    # Missing file
-    try:
-        read_requirements("does_not_exist.txt")
-    except FileNotFoundError as error:
-        print("Missing file -> " + str(error))
-
-    # Wrong type for the path
-    try:
-        read_requirements(123)
-    except TypeError as error:
-        print("Wrong path type -> " + str(error))
-
-    # Empty data
-    try:
-        check_requirements([])
-    except ValueError as error:
-        print("Empty data -> " + str(error))
-
-    # Malformed lines
-    bad_lines = ["flask", "==1.0.0", "requests==", "a==1==2", "", 42]
-    for bad_line in bad_lines:
-        try:
-            parse_line(bad_line)
-        except (TypeError, ValueError) as error:
-            print("Bad line " + repr(bad_line) + " -> " + str(error))
